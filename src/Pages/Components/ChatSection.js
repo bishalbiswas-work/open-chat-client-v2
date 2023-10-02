@@ -52,6 +52,10 @@ const ChatSection = () => {
       text: "By the way, did you know you can have your own custom GPT connected to your messenger?",
     },
   ]);
+  const [recommendedQuestions, setRecommendedQuestions] = useState([
+    'What’s MessengerGPT?',
+    'How do I connect my messenger to MessengerGPT?'
+  ])
   const [input, setInput] = useState("");
 
   const messagesEndRef = useRef(null);
@@ -59,11 +63,11 @@ const ChatSection = () => {
 
   const [isSelected, setIsSelected] = useState(false);
 
-  const scrollToBottom = () => {
-    if (isSelected) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // const scrollToBottom = () => {
+  //   if (isSelected) {
+  //     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
 
   // useEffect(scrollToBottom, [messages, isSelected]);
 
@@ -156,7 +160,7 @@ const ChatSection = () => {
   return (
     <>
       <div onClick={() => setIsSelected(true)}>
-        <div style={{ height: "1050px", width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Container maxWidth="xl">
             <Box style={{ height: "100px" }}></Box>
             <div sx={{ alignItems: "center" }}>
@@ -223,14 +227,15 @@ const ChatSection = () => {
                             flexGrow: 1,
                             color: "black",
                             fontWeight: "500",
+                            width: '50%'
                           }}
                         >
                           MessengerGPT
                         </Typography>
                         {/* <Button color="inherit">Login</Button> */}
-                        <Box>
-                          <InfoIcon />
-                        </Box>
+                      
+                          <InfoIcon color="primary"/>
+                  
                       </Toolbar>
                     </AppBar>
                   </Box>
@@ -245,6 +250,7 @@ const ChatSection = () => {
                           //   marginBottom: "20px",
                           height: "60vh",
                           overflowY: "scroll",
+                          position: 'relative'
 
                           //   border: "1px solid lightgrey",
                           //   borderRadius: "15px",
@@ -300,8 +306,36 @@ const ChatSection = () => {
                               </Box>
                             </ListItem>
                           ))}
+                          <img style={{position: 'absolute', top: '175px', left:'420px'}} src="/emoji.png"/>
                           <div ref={messagesEndRef} />
                         </List>
+                      </Box>
+                      <Box sx={{display:'flex', padding: '1rem 2rem', gap: '1rem'}}>
+                          {recommendedQuestions.map((question, index) => ( 
+                              <Box
+                                key={index}
+                                sx={{
+                                  maxWidth: 450,
+                                  cursor: 'pointer',
+                                  // border: "1px solid",
+                                  borderRadius: "15px",
+                                  backgroundColor: '#EEE',
+                                  color: '#585858',
+                                  padding: "7px",
+                                  overflowWrap: "break-word", // For long unbroken strings
+                                }}
+                              >
+                                <ListItemText
+                                  primary={question}
+                                  align={
+                                    "left" 
+                                  }
+                                  style={{
+                                    fontFamily: "Inter, sans-serif !important",
+                                  }}
+                                />
+                              </Box>
+                          ))}    
                       </Box>
                     </div>
                   </Paper>
@@ -369,9 +403,10 @@ const ChatSection = () => {
                           style={{
                             display: "",
                             justifyContent: "cemter",
+                            position: 'relative'
                           }}
                         >
-                          <Box height="5px" backgroundColor=""></Box>
+                       
                           <Button
                             variant="contained"
                             size="small"
@@ -390,7 +425,9 @@ const ChatSection = () => {
                               fontSize: "12px",
                               fontWeight: "700",
                               textTransform: "none",
-
+                              position: "absolute",
+                              left: "-77px",
+                              top: "5px"
                               // p: 0,
                             }}
                           >
