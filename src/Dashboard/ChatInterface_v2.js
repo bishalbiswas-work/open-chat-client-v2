@@ -25,8 +25,8 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
-  padding: "25px",
   borderRadius: "15px",
+  padding: 0,
   color: theme.palette.text.secondary,
 }));
 const ChatInterface_v2 = () => {
@@ -62,18 +62,25 @@ const ChatInterface_v2 = () => {
     <>
       {/* <Container> */}
       <Box sx={{ flexGrow: 1, p: 2, background: "#e8ecf3" }}>
-        <Grid container spacing={2} sx={{}}>
+        <header>
+          <div style={{display: 'flex'}}>
+            <div>
+              <a href="/">
+                <img src="/logo.png" alt="logo" />
+              </a>
+            </div>
+            <div/>
+            <div/>
+          </div>
+        </header>
+        <Grid container spacing={2} sx={{padding: '1rem 8rem'}}>
           <Grid item xs={8} sx={{ height: "100%" }}>
             <Box>
               <Grid
                 container
-                // spacing={2}
                 style={{
                   display: "flex",
-                  flexDirection: "row",
-
-                  //   alignContent: "center",
-                  //   justifyContent:"center"
+                  flexDirection: "row"
                 }}
               >
                 <Grid item xs={4}>
@@ -89,46 +96,41 @@ const ChatInterface_v2 = () => {
                       sx={{
                         fontSize: "36px",
                         fontWeight: "bold",
+                        marginLeft: '-3rem'
                       }}
                     >
-                      Leaning
+                      Learning
                     </Typography>
                   </Box>
                 </Grid>
               </Grid>
             </Box>
             <Box sx={{ height: "20px" }}></Box>
-
             <Box
               sx={{
                 background: "white",
                 padding: "20px",
                 borderRadius: "15px",
+
               }}
             >
               <Box sx={{ marginLeft: "10px" }}>
                 <Typography
                   sx={{
-                    mt: 4,
                     mb: 2,
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    color: "grey",
-                    marginLeft: "40px",
+                    fontSize: "22px",
+                    fontWeight: "500",
+                    color: "#170F49",
                   }}
                 >
-                  Trained Data
+                  {`About <BeTimeful>`}
                 </Typography>
               </Box>
               <Grid
                 container
-                // spacing={2}
                 style={{
                   display: "flex",
                   flexDirection: "column",
-
-                  //   alignContent: "center",
-                  //   justifyContent:"center"
                 }}
               >
                 <Grid style={{ flexGrow: 1 }} item xs={12}>
@@ -136,7 +138,6 @@ const ChatInterface_v2 = () => {
                     <QandADisplay content={content} />
                   </Item>
                 </Grid>
-                <Box height="20px"></Box>
                 <Grid style={{ flexGrow: 1 }} item xs={12}>
                   <Item>
                     <ContextFeed />
@@ -150,13 +151,9 @@ const ChatInterface_v2 = () => {
             <Box>
               <Grid
                 container
-                // spacing={2}
                 style={{
                   display: "flex",
                   flexDirection: "row",
-
-                  //   alignContent: "center",
-                  //   justifyContent:"center"
                 }}
               >
                 <Grid style={{}} item xs={4}>
@@ -168,7 +165,7 @@ const ChatInterface_v2 = () => {
                   xs={6}
                 >
                   <Box sx={{}}>
-                    <Typography sx={{ fontSize: "36px", fontWeight: "bold" }}>
+                    <Typography sx={{ fontSize: "36px", fontWeight: "bold", marginLeft: '2rem' }}>
                       Testing
                     </Typography>
                   </Box>
@@ -176,7 +173,6 @@ const ChatInterface_v2 = () => {
               </Grid>
             </Box>
             <Box sx={{ height: "20px" }}></Box>
-            {/* <Item> */}
             <ChatSectionDashboard />
             <Box>
               <Button
@@ -194,82 +190,14 @@ const ChatInterface_v2 = () => {
                 />
               </Button>
             </Box>
-            {/* </Item> */}
           </Grid>
         </Grid>
-        {/* Images Section */}
-        {/* <Grid container spacing={2} sx={{ height: "30vh" }}>
-          <Grid item xs={4}>
-            <Item>
-              <div
-                style={{
-                  flex: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src="/assets/Trustpilot.png"
-                  alt="Description 3"
-                  style={{ maxWidth: "450px" }}
-                />
-              </div>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "20px",
-              }}
-            >
-              <img
-                src="/assets/review 1.png"
-                alt="Description 1"
-                style={{ maxWidth: "450px" }}
-              />
-            </div>
-          </Grid>
-          <Grid item xs={4}>
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "20px",
-              }}
-            >
-              <img
-                src="/assets/review 2.png"
-                alt="Description 2"
-                style={{ maxWidth: "450px" }}
-              />
-            </div>
-          </Grid>
-        </Grid> */}
-        {/* <Grid container sx={{ height: "10vh" }}> */}
-        {/* <Grid item xs={4}>
-            <Item>xs=8</Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>xs=4</Item>
-          </Grid> */}
-        {/* <Box sx={{ height: "550px" }}></Box> */}
         <Grid item xs={12}>
           <Grid
             container
-            // spacing={2}
             style={{
               display: "flex",
               flexDirection: "row",
-
-              //   alignContent: "center",
-              //   justifyContent:"center"
             }}
           >
             <Grid
@@ -335,7 +263,7 @@ const ChatInterface_v2 = () => {
               sx={{
                 // backgroundColor: "#2196f3",
                 background:
-                  "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)",
+                  "linear-gradient(90deg, #E91E63 0%, #9C27B0 100%)",
                 borderRadius: "15px",
                 py: 1,
                 px: 4,
