@@ -54,7 +54,7 @@ const ContextFeed = () => {
     phone: dataContext.collectPhoneNo,
     name: dataContext.collectName,
   });
-  const [selectedInput2004, setSelectedInput2004] = useState(true);
+  const [selectedInput2004, setSelectedInput2004] = useState(false);
 
   const handleChange = (event) => {
     setSelectedValues({
@@ -138,7 +138,7 @@ const ContextFeed = () => {
   }, [submitQuestionAnswer]);
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, marginTop: "2rem", padding: "0 1rem" }}>
         <Grid
           container
           spacing={2}
@@ -148,13 +148,28 @@ const ContextFeed = () => {
           <Grid item xs={12}>
             <Box style={{ display: "flex" }}>
               <Button
-                variant="contained"
+                variant="text"
                 style={{
                   mx: 2,
-                  fontSize: "12px",
-                  background: selectedInput2004
-                    ? "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)"
-                    : "grey",
+                  fontSize: "20px",
+                  fontWeight: 500,
+                  color: !selectedInput2004 ? "#000" : "#717171",
+                }}
+                onClick={() => {
+                  setSelectedInput2004(false);
+                }}
+              >
+                {" "}
+                Q&A
+              </Button>
+              <Button
+                variant="text"
+                style={{
+                  mx: 2,
+                  fontSize: "20px",
+                  fontWeight: 500,
+                  color: selectedInput2004 ? "#000" : "#717171",
+                  textTransform: 'none'
                 }}
                 onClick={() => {
                   setSelectedInput2004(true);
@@ -163,30 +178,21 @@ const ContextFeed = () => {
                 Text
               </Button>
               <Box width="20px"></Box>
-              <Button
-                variant="contained"
-                style={{
-                  mx: 2,
-                  fontSize: "12px",
-                  background: !selectedInput2004
-                    ? "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)"
-                    : "grey",
-                }}
-                onClick={() => {
-                  setSelectedInput2004(false);
-                }}
-              >
-                {" "}
-                Q & A
-              </Button>
             </Box>
           </Grid>
           <Grid item xs={12}>
             {selectedInput2004 && (
               <Box>
                 <Box sx={{ display: "flex" }}>
-                  <Typography sx={{ mt: 4, fontSize: "18px" }}>
-                    Add Data About Business Name
+                  <Typography sx={{
+                    mt: 4, 
+                    fontSize: "18px",
+                    fontFamily: "DM Sans",
+                    color: "#170F49",
+                    fontWeight: "500",
+                    marginLeft: "1rem",
+                    }}>
+                   {`Add Data About <BeTimeful>`}
                   </Typography>
                 </Box>
                 <Box
@@ -194,11 +200,8 @@ const ContextFeed = () => {
                     display: "flex",
                     flexGrow: 1,
                     marginTop: "20px",
-                    // marginLeft: "15px",
                     padding: "10px",
-                    //   backgroundColor: "#F0F2F5",
-                    border: "1px solid lightgrey",
-                    borderRadius: "15px",
+                 
                   }}
                 >
                   {/* <TextField
@@ -234,7 +237,27 @@ const ContextFeed = () => {
                       handleAboutBusinessChange(index, e.target.value)
                     }
                   /> */}
-                  <textarea
+                   <TextField
+                    placeholder="Paste your company information"
+                    type="text"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    value={aboutBusiness}
+                    inputProps={{
+                      style: { fontFamily: "DM Sans", borderRadius: "8px" },
+                    }}
+                    sx={{
+                      fontSize: "18px", // reduced font size
+                      "& .MuiOutlinedInput-root": {
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#7B68EE",
+                        },
+                      },
+                    }}
+                    onChange={(e) => handleAboutBusinessChange(e.target.value)}
+                  />
+                  {/* <textarea
                     placeholder="Paste your company information"
                     value={aboutBusiness}
                     rows="6"
@@ -248,7 +271,7 @@ const ContextFeed = () => {
                       // Add other desired styles
                     }}
                     onChange={(e) => handleAboutBusinessChange(e.target.value)}
-                  />
+                  /> */}
                   {/* <Box
                     height="100%"
                     style={{
@@ -284,9 +307,18 @@ const ContextFeed = () => {
               </Box>
             )}
             {!selectedInput2004 && (
-              <Box>
+              <Box style={{ padding: "0rem 4rem 0rem 0rem" }}>
                 <Box sx={{ display: "flex" }}>
-                  <Typography sx={{ mt: 4, fontSize: "18px" }}>
+                  <Typography
+                    sx={{
+                      mt: 4,
+                      fontSize: "18px",
+                      fontFamily: "DM Sans",
+                      color: "#170F49",
+                      fontWeight: "500",
+                      marginLeft: "1rem",
+                    }}
+                  >
                     Add New Question
                   </Typography>
                 </Box>
@@ -295,45 +327,30 @@ const ContextFeed = () => {
                     display: "flex",
                     flexGrow: 1,
                     marginTop: "20px",
-                    // marginLeft: "15px",
-                    paddingTop: "5px",
-
-                    //   backgroundColor: "#F0F2F5",
-                    border: "1px solid lightgrey",
-                    borderRadius: "15px",
+                    padding: "10px",
                   }}
                 >
-                  {/* <TextField
-                    placeholder="Paste your company information"
+                  <TextField
+                    placeholder="Question?"
                     variant="outlined"
                     type="text"
                     fullWidth
-                    // multiline
-                    // rows={1}
-                    // value={item.ans}
-                    style={{
-                      fontFamily: "Inter, sans-serif !important",
+                    value={question}
+                    inputProps={{
+                      style: { fontFamily: "DM Sans", borderRadius: "8px" },
                     }}
                     sx={{
-                      fontSize: "12px", // reduced font size
+                      fontWeight: 400,
+                      fontSize: "18px", // reduced font size
                       "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "transparent", // make the border transparent
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "transparent", // make the hover border transparent
-                        },
                         "&.Mui-focused fieldset": {
-                          borderColor: "transparent", // make the focus border transparent
+                          borderColor: "#7B68EE",
                         },
-                      },
-                      "& .MuiInputBase-root": {
-                        // height: "40px", // reduce the height, but ensure it's enough for the text and padding
                       },
                     }}
-                    // onChange={(e) => handleAnswerChange(index, e.target.value)}
-                  /> */}
-                  <textarea
+                    onChange={(e) => handleQuestionChange(e.target.value)}
+                  />
+                  {/* <textarea
                     placeholder="Aa"
                     value={question}
                     // rows="4"
@@ -348,50 +365,15 @@ const ContextFeed = () => {
                       // Add other desired styles
                     }}
                     onChange={(e) => handleQuestionChange(e.target.value)}
-                  />
-                  <Box
-                    height="100%"
-                    style={{
-                      display: "",
-                      justifyContent: "cemter",
-                    }}
-                  >
-                    {/* <Box height="180px" backgroundColor=""></Box> */}
-                    {/* <Button
-                      // variant="outlined"
-                      size="small"
-                      // onClick={handleSubmit}
-                      sx={{
-                        fontFamily: "Inter, sans-serif !important",
-                      }}
-                      style={{
-                        display: "flex", // Added to help with alignment
-                        alignItems: "center", // Center items vertically
-                        justifyContent: "center", // Center items horizontally
-                        color: "blue",
-                        //   color: "white",
-                        //   borderRadius: "10px",
-                        //   background: "#0084FF",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        textTransform: "none",
-                      }}
-                    >
-                      Submit
-                    </Button> */}
-                  </Box>
+                  /> */}
                 </Box>
                 <Box
                   style={{
                     display: "flex",
                     flexGrow: 1,
                     marginTop: "20px",
-                    // marginLeft: "15px",
                     padding: "10px",
-
-                    //   backgroundColor: "#F0F2F5",
-                    border: "1px solid lightgrey",
-                    borderRadius: "15px",
+                    position: "relative",
                   }}
                 >
                   {/* <TextField
@@ -424,7 +406,27 @@ const ContextFeed = () => {
                     }}
                     // onChange={(e) => handleAnswerChange(index, e.target.value)}
                   /> */}
-                  <textarea
+                  <TextField
+                    placeholder="Answer"
+                    type="text"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    value={answer}
+                    inputProps={{
+                      style: { fontFamily: "DM Sans", borderRadius: "8px" },
+                    }}
+                    sx={{
+                      fontSize: "18px", // reduced font size
+                      "& .MuiOutlinedInput-root": {
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#7B68EE",
+                        },
+                      },
+                    }}
+                    onChange={(e) => handleAnswerChange(e.target.value)}
+                  />
+                  {/* <textarea
                     placeholder="Paste your company information"
                     value={answer}
                     rows="4"
@@ -438,41 +440,39 @@ const ContextFeed = () => {
                       // Add other desired styles
                     }}
                     onChange={(e) => handleAnswerChange(e.target.value)}
-                  />
-                  <Box
-                    height="100%"
+                  /> */}
+                  <Button
+                    // variant="outlined"
+                    size="small"
+                    onClick={() => {
+                      handleSubmitQuestoinAndAnswer();
+                      setSubmitQuestionAnswer(true);
+                    }}
+                    sx={{
+                      fontFamily: "Inter, sans-serif !important",
+                    }}
                     style={{
-                      display: "",
-                      justifyContent: "cemter",
+                      display: "flex", // Added to help with alignment
+                      alignItems: "center", // Center items vertically
+                      justifyContent: "center", // Center items horizontally
+                      color: "blue",
+                      //   color: "white",
+                      //   borderRadius: "10px",
+                      //   background: "#0084FF",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      textTransform: "none",
+                      position: "absolute",
+                      right: "32px",
+                      bottom: "22px",
+                      background:
+                        "linear-gradient(225deg, #693283 0%, #323283 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
                     }}
                   >
-                    <Box height="90px" backgroundColor=""></Box>
-                    <Button
-                      // variant="outlined"
-                      size="small"
-                      onClick={() => {
-                        handleSubmitQuestoinAndAnswer();
-                        setSubmitQuestionAnswer(true);
-                      }}
-                      sx={{
-                        fontFamily: "Inter, sans-serif !important",
-                      }}
-                      style={{
-                        display: "flex", // Added to help with alignment
-                        alignItems: "center", // Center items vertically
-                        justifyContent: "center", // Center items horizontally
-                        color: "blue",
-                        //   color: "white",
-                        //   borderRadius: "10px",
-                        //   background: "#0084FF",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        textTransform: "none",
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  </Box>
+                    Submit
+                  </Button>
                 </Box>
               </Box>
             )}
@@ -487,7 +487,7 @@ const ContextFeed = () => {
             >
               <FormControl sx={{ justifyContent: "start" }}>
                 <FormLabel id="demo-checkbox-group-label">
-                  <Typography sx={{ mt: 4, fontSize: "18px" }}>
+                  <Typography sx={{ mt: 4, fontSize: "18px", fontFamily: 'DM Sans', color: '#170F49', fontWeight: 500 }}>
                     Contact info to collect in case AI can't answer question:
                   </Typography>
                 </FormLabel>
@@ -502,10 +502,16 @@ const ContextFeed = () => {
                         checked={selectedValues.email}
                         onChange={handleChange}
                         name="email"
-                        sx={{ borderRadius: "0" }}
+                        sx={{ 
+                          borderRadius: "0",
+                          "&.Mui-checked": {
+                            color: "#693283",
+                          },
+                        }}
                       />
                     }
                     label="Email"
+                    style={{ color: '#2F007B' }}
                   />
                   <FormControlLabel
                     control={
@@ -513,10 +519,17 @@ const ContextFeed = () => {
                         checked={selectedValues.phone}
                         onChange={handleChange}
                         name="phone"
-                        sx={{ borderRadius: "0" }}
+                        inputProps={{style: {borderRadius: '50px',}}}
+                        sx={{
+                           borderRadius: "0",
+                           "&.Mui-checked": {
+                            color: "#693283",
+                          },      
+                          }}
                       />
                     }
                     label="Mobile No. "
+                    style={{ color: '#2F007B' }}
                   />
                   <FormControlLabel
                     control={
@@ -524,10 +537,16 @@ const ContextFeed = () => {
                         checked={selectedValues.name}
                         onChange={handleChange}
                         name="name"
-                        sx={{ borderRadius: "0" }}
+                        sx={{
+                          borderRadius: "0",
+                          "&.Mui-checked": {
+                            color: "#693283",
+                          },
+                        }}
                       />
                     }
                     label="Name"
+                    style={{ color: '#2F007B' }}
                   />
                 </FormGroup>
               </FormControl>
@@ -536,26 +555,29 @@ const ContextFeed = () => {
               {loader ? (
                 <CircularProgress />
               ) : (
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    handleSubmitAllData();
-                    setSubmitAllData(true);
-                  }}
-                  style={{
-                    fontSize: "18px",
-                    paddingLeft: "60px",
-                    paddingRight: "60px",
-                    fontWeight: "bold",
+                // <Button
+                //   variant="contained"
+                //   onClick={() => {
+                //     handleSubmitAllData();
+                //     setSubmitAllData(true);
+                //   }}
+                //   style={{
+                //     fontSize: "18px",
+                //     paddingLeft: "60px",
+                //     paddingRight: "60px",
+                //     fontWeight: "bold",
 
-                    background:
-                      "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)",
-                    padding: "5px 80px", // Adjust padding as needed
-                    borderRadius: "8px", // Adjust border radius as needed
-                  }}
-                >
-                  Submit
-                </Button>
+                //     background:
+                //       "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)",
+                //     padding: "5px 80px", // Adjust padding as needed
+                //     borderRadius: "8px", // Adjust border radius as needed
+                //   }}
+                // >
+                //   Submit
+                // </Button>
+                <Box className="chat-btn-box">
+                <button className="chat-btn">Submit</button>
+              </Box>
               )}
             </Box>
           </Grid>
