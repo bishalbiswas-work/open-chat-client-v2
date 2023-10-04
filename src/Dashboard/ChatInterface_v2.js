@@ -25,8 +25,8 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
+  padding: "25px",
   borderRadius: "15px",
-  padding: 0,
   color: theme.palette.text.secondary,
 }));
 const ChatInterface_v2 = () => {
@@ -56,31 +56,31 @@ const ChatInterface_v2 = () => {
     },
   ];
   const openNewPage = () => {
-    window.open("/suscription.html", "_blank");
+    window.open("/subscription.html", "_blank");
   };
   return (
     <>
       {/* <Container> */}
       <Box sx={{ flexGrow: 1, p: 2, background: "#e8ecf3" }}>
         <header>
-          <div style={{display: 'flex'}}>
+          <div style={{ display: "flex" }}>
             <div>
               <a href="/">
-                <img src="/logo.png" alt="logo" />
+                <img src="/assets/logo.png" alt="logo" />
               </a>
             </div>
-            <div/>
-            <div/>
+            <div />
+            <div />
           </div>
         </header>
-        <Grid container spacing={2} sx={{padding: '1rem 8rem'}}>
+        <Grid container spacing={2} sx={{ padding: "1rem 8rem" }}>
           <Grid item xs={8} sx={{ height: "100%" }}>
             <Box>
               <Grid
                 container
                 style={{
                   display: "flex",
-                  flexDirection: "row"
+                  flexDirection: "row",
                 }}
               >
                 <Grid item xs={4}>
@@ -96,7 +96,7 @@ const ChatInterface_v2 = () => {
                       sx={{
                         fontSize: "36px",
                         fontWeight: "bold",
-                        marginLeft: '-3rem'
+                        marginLeft: "-3rem",
                       }}
                     >
                       Learning
@@ -111,7 +111,6 @@ const ChatInterface_v2 = () => {
                 background: "white",
                 padding: "20px",
                 borderRadius: "15px",
-
               }}
             >
               <Box sx={{ marginLeft: "10px" }}>
@@ -123,7 +122,7 @@ const ChatInterface_v2 = () => {
                     color: "#170F49",
                   }}
                 >
-                  {`About <BeTimeful>`}
+                  {`About ${dataContext.name}`}
                 </Typography>
               </Box>
               <Grid
@@ -132,6 +131,7 @@ const ChatInterface_v2 = () => {
                   display: "flex",
                   flexDirection: "column",
                 }}
+                spacing="2"
               >
                 <Grid style={{ flexGrow: 1 }} item xs={12}>
                   <Item>
@@ -165,7 +165,13 @@ const ChatInterface_v2 = () => {
                   xs={6}
                 >
                   <Box sx={{}}>
-                    <Typography sx={{ fontSize: "36px", fontWeight: "bold", marginLeft: '2rem' }}>
+                    <Typography
+                      sx={{
+                        fontSize: "36px",
+                        fontWeight: "bold",
+                        marginLeft: "2rem",
+                      }}
+                    >
                       Testing
                     </Typography>
                   </Box>
@@ -262,8 +268,7 @@ const ChatInterface_v2 = () => {
               //   onClick={() => handleSelectPage(selectedCountry)}
               sx={{
                 // backgroundColor: "#2196f3",
-                background:
-                  "linear-gradient(90deg, #E91E63 0%, #9C27B0 100%)",
+                background: "linear-gradient(90deg, #E91E63 0%, #9C27B0 100%)",
                 borderRadius: "15px",
                 py: 1,
                 px: 4,

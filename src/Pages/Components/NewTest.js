@@ -2,7 +2,7 @@ import React from "react";
 
 const NewTest = () => {
   return (
-    <div style={{padding: '2rem 4rem', marginLeft: '10px'}}>
+    <div style={{ padding: "2rem 4rem", marginLeft: "10px" }}>
       <div className="style-0">
         <div className="style-1">
           <div className="style-2">
@@ -13,7 +13,11 @@ const NewTest = () => {
               className="style-3"
             />
             <h3 className="style-4">Game Changer</h3>
-            <p className="style-5">"This AI-powered Facebook Messenger is a game-changer! It's like having a 24/7 sales assistant who never sleeps. Say goodbye to missed opportunities and hello to increased revenue!"</p>
+            <p className="style-5">
+              "This AI-powered Facebook Messenger is a game-changer! It's like
+              having a 24/7 sales assistant who never sleeps. Say goodbye to
+              missed opportunities and hello to increased revenue!"
+            </p>
             <div className="style-6">
               <div className="style-7">
                 <img
@@ -43,7 +47,11 @@ const NewTest = () => {
               className="style-14"
             />
             <h3 className="style-15">Profit Partner</h3>
-            <p className="style-16">"I was skeptical at first, but this AI blew me away. It's not just answering questions; it's closing deals. My sales have never been better!"</p>
+            <p className="style-16">
+              "I was skeptical at first, but this AI blew me away. It's not just
+              answering questions; it's closing deals. My sales have never been
+              better!"
+            </p>
             <div className="style-17">
               <div className="style-18">
                 <img
@@ -80,7 +88,10 @@ const NewTest = () => {
                 className="style-27"
               />
               <h3 className="style-28">Sales Wizard</h3>
-              <p className="style-29">"If you're in business, you need this AI in your corner. It's like having a supercharged sales team that never calls in sick."</p>
+              <p className="style-29">
+                "If you're in business, you need this AI in your corner. It's
+                like having a supercharged sales team that never calls in sick."
+              </p>
               <div className="style-30">
                 <div className="style-31">
                   <img
@@ -122,7 +133,11 @@ const NewTest = () => {
                 className="style-41"
               />
               <h3 className="style-42">Customer Savior</h3>
-              <p className="style-43">"This AI isn't just smart; it's brilliant! It anticipates customer needs and upsells like a pro. It's a must-have for any serious entrepreneur."</p>
+              <p className="style-43">
+                "This AI isn't just smart; it's brilliant! It anticipates
+                customer needs and upsells like a pro. It's a must-have for any
+                serious entrepreneur."
+              </p>
               <div className="style-44">
                 <div className="style-45">
                   <img
@@ -153,7 +168,10 @@ const NewTest = () => {
               className="style-52"
             />
             <h3 className="style-53">Mind Blowing</h3>
-            <p className="style-54">"I can't believe the ROI I've seen since implementing this AI. It's not just saving time; it's making money. Highly recommend!"</p>
+            <p className="style-54">
+              "I can't believe the ROI I've seen since implementing this AI.
+              It's not just saving time; it's making money. Highly recommend!"
+            </p>
             <div className="style-55">
               <div className="style-56">
                 <img
@@ -185,7 +203,11 @@ const NewTest = () => {
               className="style-64"
             />
             <h3 className="style-65">Time Saver</h3>
-            <p className="style-66">"Efficiency meets excellence with this AI. It not only handles customer inquiries seamlessly but also turns them into loyal, repeat buyers."</p>
+            <p className="style-66">
+              "Efficiency meets excellence with this AI. It not only handles
+              customer inquiries seamlessly but also turns them into loyal,
+              repeat buyers."
+            </p>
             <div className="style-67">
               <div className="style-68">
                 <img
@@ -215,7 +237,10 @@ const NewTest = () => {
               className="style-75"
             />
             <h3 className="style-76">Revenue Rocket</h3>
-            <p className="style-77">"The future of customer engagement is here, and it's powered by this AI. It's not just a chatbot; it's a revenue generator."</p>
+            <p className="style-77">
+              "The future of customer engagement is here, and it's powered by
+              this AI. It's not just a chatbot; it's a revenue generator."
+            </p>
             <div className="style-78">
               <div className="style-79">
                 <img
@@ -252,7 +277,11 @@ const NewTest = () => {
                 className="style-88"
               />
               <h3 className="style-89">Conversion King!</h3>
-              <p className="style-90">"This AI doesn't just talk; it sells. It's like having a sales guru in your messenger, working tirelessly to grow your business."</p>
+              <p className="style-90">
+                "This AI doesn't just talk; it sells. It's like having a sales
+                guru in your messenger, working tirelessly to grow your
+                business."
+              </p>
               <div className="style-91">
                 <div className="style-92">
                   <img
@@ -285,7 +314,10 @@ const NewTest = () => {
               className="style-100"
             />
             <h3 className="style-101">Marketing Marvel</h3>
-            <p className="style-102">"I've tried other chatbots, but this AI takes the cake. It's a revenue-boosting powerhouse that every business needs."</p>
+            <p className="style-102">
+              "I've tried other chatbots, but this AI takes the cake. It's a
+              revenue-boosting powerhouse that every business needs."
+            </p>
             <div className="style-103">
               <div className="style-104">
                 <img
@@ -322,7 +354,11 @@ const NewTest = () => {
                 className="style-113"
               />
               <h3 className="style-114">Profit Maximus</h3>
-              <p className="style-115">"Don't leave money on the table – let this AI work its magic in your messenger. It's the secret weapon for skyrocketing your sales!"</p>
+              <p className="style-115">
+                "Don't leave money on the table – let this AI work its magic in
+                your messenger. It's the secret weapon for skyrocketing your
+                sales!"
+              </p>
               <div className="style-116">
                 <div className="style-117">
                   <img
@@ -353,7 +389,11 @@ const NewTest = () => {
               className="style-124"
             />
             <h3 className="style-125">Simplified Audience Engagement!</h3>
-            <p className="style-126">I used to struggle with managing comments and engaging with my viewers. With this platform, I can easily connect with my audience, fostering a strong community around my channel.</p>
+            <p className="style-126">
+              I used to struggle with managing comments and engaging with my
+              viewers. With this platform, I can easily connect with my
+              audience, fostering a strong community around my channel.
+            </p>
             <div className="style-127">
               <div className="style-128">
                 <img

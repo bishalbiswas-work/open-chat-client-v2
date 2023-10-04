@@ -19,26 +19,56 @@ const Appbar1 = () => {
   const handleNextPage = () => {
     navigate("/auth");
   };
-
-  
-
   return (
-    <header className="header">
-      <div className="header-box">
-        <div>
-          <a href="/">
-          <img src="/logo.png" alt="logo" />
-          </a>
-        </div>
-        <div>
-          <h6 className="header-menu"><a style={{ cursor: 'pointer', color: 'black'}}  href="#how">How it works</a></h6>
-        </div>
-        <div className="button-box">
-          <button onClick={handleNextPage} className="button-white">Sign Up</button>
-          <button onClick={handleNextPage} className="button-primary">Log In</button>
-        </div>
-      </div>
-    </header>
+    <div>
+      <Box sx={{ flexGrow: 1, pb: 2 }}>
+        <Container maxWidth="xl">
+          <AppBar
+            position="static"
+            sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+          >
+            <Toolbar>
+              {/* <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton> */}
+              <Box style={{ height: "120px" }}></Box>
+              {/* <Typography
+                variant="h6"
+                component="div"
+               
+              >
+                MessengerGPT
+              </Typography> */}
+              <IconButton>
+                <img width="50px" src="/assets/messengergpt-icon.png" />
+              </IconButton>
+              <Box sx={{ flexGrow: 1 }}></Box>
+              {/* <Button
+                variant="contained"
+                size="large"
+                // onClick={() => handleNextPage()}
+                // sx={{ borderRadius: "15px", background: "#2196f3" }}
+                style={{
+                  fontSize: "12px",
+                  background:
+                    "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)",
+                  padding: "10px 25px", // Adjust padding as needed
+                  borderRadius: "8px", // Adjust border radius as needed
+                }}
+              >
+                Get Started It's Free!
+              </Button> */}
+            </Toolbar>
+          </AppBar>
+        </Container>
+      </Box>
+    </div>
   );
 };
 

@@ -15,7 +15,7 @@ const WrapperComponent = ({ children }) => {
         {children}
         {/*  */}
       </FullHeightPaper>
-      <LiveChat />
+      {/* <LiveChat /> */}
     </div>
   );
 };

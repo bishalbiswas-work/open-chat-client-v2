@@ -21,7 +21,6 @@ import { useContext } from "react";
 import DataContext from "../../ContextAPI/DataState";
 // ContextAPI End
 const QandADisplay = ({ content: initialContent }) => {
-  console.log(initialContent);
   // const navigate = useNavigate();
   const dataContext = useContext(DataContext);
   const [questions, setQuestions] = useState(dataContext.questions);
@@ -57,96 +56,235 @@ const QandADisplay = ({ content: initialContent }) => {
 
   return (
     <>
-      {questions?.length > 0 && (
-        <Box
-          className="boxClass"
-          style={{
-            maxHeight: "310px",
-            overflowY: "auto",
-          }}
-        >
-          {questions.map((item, index) => (
-            <Grid container>
-              <Grid item xs={11}>
+      <Box
+        style={{
+          maxHeight: "400px",
+          overflowY: "auto",
+        }}
+      >
+        {questions.map((item, index) => (
+          <Grid container>
+            <Grid item xs={11}>
+              <Box>
                 <Box>
-                  <Box>
+                  <Box
+                    key={index}
+                    style={{
+                      display: "flex",
+                      flexGrow: 1,
+                      marginTop: "20px",
+                      marginLeft: "15px",
+                      padding: "10px",
+                      paddingTop: "20px",
+                      //   backgroundColor: "#F0F2F5",
+                      border: "1px solid lightgrey",
+                      borderRadius: "15px",
+                    }}
+                  >
+                    {/* <TextField
+                      placeholder="Aa"
+                      variant="outlined"
+                      type="text"
+                      fullWidth
+                      value={questions[index]}
+                      style={{
+                        fontFamily: "Inter, sans-serif !important",
+                      }}
+                      sx={{
+                        fontSize: "10px", // reduced font size
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            // borderColor: "transparent", // make the border transparent
+                            borderWidth: 0,
+                          },
+                          "&:hover fieldset": {
+                            // borderColor: "transparent", // make the hover border transparent
+                            borderWidth: 0,
+                          },
+                          "&.Mui-focused fieldset": {
+                            // borderColor: "transparent", // make the focus border transparent
+                            borderWidth: 0,
+                          },
+                        },
+                        "& .MuiInputBase-root": {
+                          height: "40px", // reduce the height, but ensure it's enough for the text and padding
+                        },
+                      }}
+                      onChange={(e) =>
+                        handleQuestionChange(index, e.target.value)
+                      }
+                    /> */}
+                    <textarea
+                      placeholder="Aa"
+                      value={questions[index]}
+                      // rows="4"
+                      style={{
+                        width: "100%", // For full width
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        border: "none", // Removes default border
+                        outline: "none", // Removes focus border
+                        resize: "none", // Prevents user resizing
+                        p: 2,
+                        // Add other desired styles
+                      }}
+                      onChange={(e) =>
+                        handleQuestionChange(index, e.target.value)
+                      }
+                    />
                     <Box
                       key={index}
+                      height="100%"
                       style={{
-                        marginTop: "20px",
-                        marginLeft: "15px",
+                        display: "",
+                        justifyContent: "cemter",
                       }}
                     >
-                      <TextField
-                        placeholder="Aa"
-                        variant="outlined"
-                        type="text"
-                        fullWidth
-                        value={questions[index]}
-                        inputProps={{
-                          style: { fontFamily: "DM Sans", borderRadius: "8px" },
-                        }}
+                      <Box height="5px" backgroundColor=""></Box>
+                      <Button
+                        // variant="contained"
+                        size="small"
+                        // onClick={handleSubmit}
                         sx={{
-                          fontWeight: 400,
-                          fontSize: "18px", // reduced font size
-                          "& .MuiOutlinedInput-root": {
-                            "&.Mui-focused fieldset": {
-                              borderColor: "#7B68EE",
-                            },
-                          },
+                          fontFamily: "Inter, sans-serif !important",
                         }}
-                        onChange={(e) =>
-                          handleQuestionChange(index, e.target.value)
-                        }
-                      />
-                    </Box>
-                    <Box
-                      style={{
-                        display: "flex",
-                        marginTop: "20px",
-                        marginLeft: "15px",
-                      }}
-                    >
-                      <TextField
-                        placeholder="Aa"
-                        type="text"
-                        fullWidth
-                        multiline
-                        rows={4}
-                        value={answers[index]}
-                        inputProps={{
-                          style: { fontFamily: "DM Sans", borderRadius: "8px" },
+                        style={{
+                          display: "flex", // Added to help with alignment
+                          alignItems: "center", // Center items vertically
+                          justifyContent: "center", // Center items horizontally
+
+                          color: "black",
+                          borderRadius: "10px",
+                          //   background: "#0084FF",
+                          fontSize: "12px",
+                          fontWeight: "700",
+                          textTransform: "none",
+
+                          // p: 0,
                         }}
-                        sx={{
-                          fontSize: "18px", // reduced font size
-                          "& .MuiOutlinedInput-root": {
-                            "&.Mui-focused fieldset": {
-                              borderColor: "#7B68EE",
-                            },
-                          },
-                        }}
-                        onChange={(e) =>
-                          handleAnswerChange(index, e.target.value)
-                        }
-                      />
+                      >
+                        {/* <EditIcon /> */}
+                      </Button>
                     </Box>
                   </Box>
+
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexGrow: 1,
+                      marginTop: "20px",
+                      marginLeft: "15px",
+                      padding: "10px",
+                      //   backgroundColor: "#F0F2F5",
+                      border: "1px solid lightgrey",
+                      borderRadius: "15px",
+                    }}
+                  >
+                    {/* <TextField
+                  placeholder="Aa"
+                  // variant="outlined"
+                  // type="text"
+                  fullWidth
+                  // id="filled-multiline-flexible"
+                  // label="Multiline"
+                  multiline
+                  // maxRows={4}
+                  rows={4}
+                  // variant="filled"
+                  value={answers[index]}
+                  style={{
+                    // eight: "100px", // Or any reasonable max-height you need
+                    // overflowY: "auto",
+                    fontFamily: "Inter, sans-serif !important",
+                  }}
+                  sx={{
+                    fontSize: "12px", // reduced font size
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        // borderColor: "transparent", // make the border transparent
+                        borderWidth: 0,
+                      },
+                      "&:hover fieldset": {
+                        // borderColor: "transparent", // make the hover border transparent
+                        borderWidth: 0,
+                      },
+                      "&.Mui-focused fieldset": {
+                        // borderColor: "transparent", // make the focus border transparent
+                        borderWidth: 0,
+                      },
+                    },
+                    "& .MuiInputBase-root": {
+                      //   height: "40px", // reduce the height, but ensure it's enough for the text and padding
+                    },
+                  }}
+                  onChange={(e) => handleAnswerChange(index, e.target.value)}
+                /> */}
+                    <textarea
+                      placeholder="Aa"
+                      value={answers[index]}
+                      rows="4"
+                      style={{
+                        width: "100%", // For full width
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        border: "none", // Removes default border
+                        outline: "none", // Removes focus border
+                        resize: "none", // Prevents user resizing
+                        // Add other desired styles
+                      }}
+                      onChange={(e) =>
+                        handleAnswerChange(index, e.target.value)
+                      }
+                    />
+
+                    {/* <Box
+                  height="100%"
+                  style={{
+                    display: "",
+                    justifyContent: "cemter",
+                  }}
+                >
+                  <Box height="80px" backgroundColor=""></Box>
+                  <Button
+                    // variant="outlined"
+                    size="small"
+                    // onClick={handleSubmit}
+                    sx={{
+                      fontFamily: "Inter, sans-serif !important",
+                    }}
+                    style={{
+                      display: "flex", // Added to help with alignment
+                      alignItems: "center", // Center items vertically
+                      justifyContent: "center", // Center items horizontally
+                      color: "blue",
+                      //   color: "white",
+                      //   borderRadius: "10px",
+                      //   background: "#0084FF",
+                      fontSize: "12px",
+                      fontWeight: "700",
+                      textTransform: "none",
+
+                      // p: 0,
+                    }}
+                  >
+                    Update
+                  </Button>
+                </Box> */}
+                  </Box>
                 </Box>
-              </Grid>
-              <Grid item xs={1}>
-                <IconButton style={{ marginTop: "9px", marginLeft: "-25px" }}>
-                  <img src="/delete.svg" alt="delete" />
-                </IconButton>
-              </Grid>
+              </Box>
             </Grid>
-          ))}
-        </Box>
-      )}
-      {questions?.length > 0 && (
-        <Box className="chat-btn-box">
-          <button className="chat-btn">Submit</button>
-        </Box>
-      )}
+            <Grid item xs={1}>
+              {/* <IconButton>
+                <DeleteIcon />
+              </IconButton> */}
+              <IconButton style={{ marginTop: "9px", marginLeft: "-25px" }}>
+                <img src="/assets/delete.svg" alt="delete" />
+              </IconButton>
+            </Grid>
+          </Grid>
+        ))}
+      </Box>
     </>
   );
 };

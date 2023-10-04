@@ -2,11 +2,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // Visual Imports
+import PropTypes from "prop-types";
+
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { Grid, Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import LinearProgress from "@mui/material/LinearProgress";
+// import LinearProgress from "@mui/material/LinearProgress";
+import LinearProgress, {
+  LinearProgressProps,
+} from "@mui/material/LinearProgress";
 
 import Button from "@mui/material/Button";
 // End of Visual Imports
@@ -27,6 +32,7 @@ const ExtractData = () => {
   //
   const navigate = useNavigate();
   const dataContext = useContext(DataContext);
+  const [progress, setProgress] = React.useState(1);
 
   const texts = [
     "Fetching the magic for you! ✨",
@@ -49,6 +55,16 @@ const ExtractData = () => {
 
     return () => {
       clearInterval(interval);
+    };
+  }, []);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) =>
+        prevProgress >= 100 ? 1 : prevProgress + 1
+      );
+    }, 10000);
+    return () => {
+      clearInterval(timer);
     };
   }, []);
 
@@ -146,11 +162,11 @@ const ExtractData = () => {
     //   return null;
     // }
   };
-  useEffect(() => {
-    // Update the document title using the browser API
-    // handleLoad();
-    // setstate(true);
-  });
+  // useEffect(() => {
+  //   // Update the document title using the browser API
+  //   setstate(true);
+  //   handleLoad();
+  // });
   return (
     <div>
       <Box
@@ -221,8 +237,11 @@ const ExtractData = () => {
         <Box mt={2}>
           {state ? (
             // <CircularProgress />
+            // <Box sx={{ width: "500px" }}>
+            //   <LinearProgress color="secondary" />
+            // </Box>
             <Box sx={{ width: "500px" }}>
-              <LinearProgress color="secondary" />
+              <LinearProgressWithLabel value={progress} />
             </Box>
           ) : (
             <Button
@@ -274,6 +293,29 @@ const ExtractData = () => {
       </Box>
     </div>
   );
+};
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ width: "100%", mr: 1 }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+LinearProgressWithLabel.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate and buffer variants.
+   * Value between 0 and 100.
+   */
+  value: PropTypes.number.isRequired,
 };
 
 export default ExtractData;

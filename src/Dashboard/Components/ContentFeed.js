@@ -54,7 +54,7 @@ const ContextFeed = () => {
     phone: dataContext.collectPhoneNo,
     name: dataContext.collectName,
   });
-  const [selectedInput2004, setSelectedInput2004] = useState(false);
+  const [selectedInput2004, setSelectedInput2004] = useState(true);
 
   const handleChange = (event) => {
     setSelectedValues({
@@ -169,7 +169,7 @@ const ContextFeed = () => {
                   fontSize: "20px",
                   fontWeight: 500,
                   color: selectedInput2004 ? "#000" : "#717171",
-                  textTransform: 'none'
+                  textTransform: "none",
                 }}
                 onClick={() => {
                   setSelectedInput2004(true);
@@ -181,18 +181,20 @@ const ContextFeed = () => {
             </Box>
           </Grid>
           <Grid item xs={12}>
-            {selectedInput2004 && (
+            {!selectedInput2004 && (
               <Box>
                 <Box sx={{ display: "flex" }}>
-                  <Typography sx={{
-                    mt: 4, 
-                    fontSize: "18px",
-                    fontFamily: "DM Sans",
-                    color: "#170F49",
-                    fontWeight: "500",
-                    marginLeft: "1rem",
-                    }}>
-                   {`Add Data About <BeTimeful>`}
+                  <Typography
+                    sx={{
+                      mt: 4,
+                      fontSize: "18px",
+                      fontFamily: "DM Sans",
+                      color: "#170F49",
+                      fontWeight: "500",
+                      marginLeft: "1rem",
+                    }}
+                  >
+                    {`Add Data About <BeTimeful>`}
                   </Typography>
                 </Box>
                 <Box
@@ -201,7 +203,6 @@ const ContextFeed = () => {
                     flexGrow: 1,
                     marginTop: "20px",
                     padding: "10px",
-                 
                   }}
                 >
                   {/* <TextField
@@ -237,7 +238,7 @@ const ContextFeed = () => {
                       handleAboutBusinessChange(index, e.target.value)
                     }
                   /> */}
-                   <TextField
+                  <TextField
                     placeholder="Paste your company information"
                     type="text"
                     fullWidth
@@ -306,7 +307,7 @@ const ContextFeed = () => {
                 </Box>
               </Box>
             )}
-            {!selectedInput2004 && (
+            {selectedInput2004 && (
               <Box style={{ padding: "0rem 4rem 0rem 0rem" }}>
                 <Box sx={{ display: "flex" }}>
                   <Typography
@@ -487,7 +488,15 @@ const ContextFeed = () => {
             >
               <FormControl sx={{ justifyContent: "start" }}>
                 <FormLabel id="demo-checkbox-group-label">
-                  <Typography sx={{ mt: 4, fontSize: "18px", fontFamily: 'DM Sans', color: '#170F49', fontWeight: 500 }}>
+                  <Typography
+                    sx={{
+                      mt: 4,
+                      fontSize: "18px",
+                      fontFamily: "DM Sans",
+                      color: "#170F49",
+                      fontWeight: 500,
+                    }}
+                  >
                     Contact info to collect in case AI can't answer question:
                   </Typography>
                 </FormLabel>
@@ -502,7 +511,7 @@ const ContextFeed = () => {
                         checked={selectedValues.email}
                         onChange={handleChange}
                         name="email"
-                        sx={{ 
+                        sx={{
                           borderRadius: "0",
                           "&.Mui-checked": {
                             color: "#693283",
@@ -511,7 +520,7 @@ const ContextFeed = () => {
                       />
                     }
                     label="Email"
-                    style={{ color: '#2F007B' }}
+                    style={{ color: "#2F007B" }}
                   />
                   <FormControlLabel
                     control={
@@ -519,17 +528,17 @@ const ContextFeed = () => {
                         checked={selectedValues.phone}
                         onChange={handleChange}
                         name="phone"
-                        inputProps={{style: {borderRadius: '50px',}}}
+                        inputProps={{ style: { borderRadius: "50px" } }}
                         sx={{
-                           borderRadius: "0",
-                           "&.Mui-checked": {
+                          borderRadius: "0",
+                          "&.Mui-checked": {
                             color: "#693283",
-                          },      
-                          }}
+                          },
+                        }}
                       />
                     }
                     label="Mobile No. "
-                    style={{ color: '#2F007B' }}
+                    style={{ color: "#2F007B" }}
                   />
                   <FormControlLabel
                     control={
@@ -546,39 +555,39 @@ const ContextFeed = () => {
                       />
                     }
                     label="Name"
-                    style={{ color: '#2F007B' }}
+                    style={{ color: "#2F007B" }}
                   />
                 </FormGroup>
               </FormControl>
             </Box>
             <Box sx={{ my: 4 }}>
-              {loader ? (
-                <CircularProgress />
-              ) : (
-                // <Button
-                //   variant="contained"
-                //   onClick={() => {
-                //     handleSubmitAllData();
-                //     setSubmitAllData(true);
-                //   }}
-                //   style={{
-                //     fontSize: "18px",
-                //     paddingLeft: "60px",
-                //     paddingRight: "60px",
-                //     fontWeight: "bold",
+              <Box className="chat-btn-box">
+                {loader ? (
+                  <CircularProgress />
+                ) : (
+                  <button
+                    className="chat-btn"
+                    variant="contained"
+                    onClick={() => {
+                      handleSubmitAllData();
+                      setSubmitAllData(true);
+                    }}
+                    // style={{
+                    //   fontSize: "18px",
+                    //   paddingLeft: "60px",
+                    //   paddingRight: "60px",
+                    //   fontWeight: "bold",
 
-                //     background:
-                //       "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)",
-                //     padding: "5px 80px", // Adjust padding as needed
-                //     borderRadius: "8px", // Adjust border radius as needed
-                //   }}
-                // >
-                //   Submit
-                // </Button>
-                <Box className="chat-btn-box">
-                <button className="chat-btn">Submit</button>
+                    //   background:
+                    //     "linear-gradient(180deg, rgb(105.08, 50, 131) 0%, rgb(50.16, 50.16, 130.74) 100%)",
+                    //   padding: "5px 80px", // Adjust padding as needed
+                    //   borderRadius: "8px", // Adjust border radius as needed
+                    // }}
+                  >
+                    Submit
+                  </button>
+                )}
               </Box>
-              )}
             </Box>
           </Grid>
         </Grid>
