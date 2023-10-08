@@ -51,7 +51,7 @@ const ExtractData = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 3000); // Change interval as needed
+    }, 2000); // Change interval as needed
 
     return () => {
       clearInterval(interval);
@@ -62,7 +62,7 @@ const ExtractData = () => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 1 : prevProgress + 1
       );
-    }, 10000);
+    }, 5000);
     return () => {
       clearInterval(timer);
     };
@@ -70,7 +70,7 @@ const ExtractData = () => {
 
   const [conversations, setConversations] = useState([]);
   const [textBlob, setTextBlob] = useState("");
-  const [state, setstate] = useState(false);
+  const [state, setstate] = useState(true);
   const [error, setError] = useState(false);
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const getLogin = async (submitData) => {
@@ -90,6 +90,10 @@ const ExtractData = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    handleLoad()
+  },[])
   // const fetchPages = async (token) => {
   //   try {
   //     const response = await fetch(
@@ -139,34 +143,12 @@ const ExtractData = () => {
       delay(2000);
       navigate("/dashboard/chat");
     } catch (error) {
-      setstate(false);
+      setstate(true);
       console.error("There was an error with getLogin:", error);
       // Handle the error or set some state here if necessary
     }
-
-    // try {
-    //   // Verify and decode the JWT token
-    //   // const decoded = jwt.decode(output.data.authToken);
-    //   const { decodedToken, isExpired } = useJwt(output.data.authToken);
-    //   // Check if the decoded token contains a UID field
-    //   if (decodedToken) {
-    //     dataContext.setUidFunction({ data: decodedToken });
-    //     console.log("UID: ", decodedToken);
-    //   } else {
-    //     // Token doesn't contain a UID field or is invalid
-    //     return null;
-    //   }
-    // } catch (error) {
-    //   // Token is invalid or couldn't be decoded
-    //   console.error("Error decoding JWT token:", error);
-    //   return null;
-    // }
-  };
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   setstate(true);
-  //   handleLoad();
-  // });
+  }
+  
   return (
     <div>
       <Box
@@ -299,7 +281,14 @@ function LinearProgressWithLabel(props) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Box sx={{ width: "100%", mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} />
+        <LinearProgress 
+        variant="determinate" 
+        sx={{ 
+          height: '10px',
+          borderRadius: '10px'
+        }} 
+        
+        {...props} />
       </Box>
       <Box sx={{ minWidth: 35 }}>
         <Typography variant="body2" color="text.secondary">{`${Math.round(

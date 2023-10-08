@@ -33,6 +33,8 @@ import { useContext } from "react";
 import DataContext from "../../ContextAPI/DataState";
 // ContextAPI End
 import jwt_decode from "jwt-decode";
+import { BeatLoader } from "react-spinners";
+import _ from 'lodash';
 
 const ChatSectionDashboard = ({ heightVal }) => {
   // Base Url
@@ -47,14 +49,12 @@ const ChatSectionDashboard = ({ heightVal }) => {
     {
       sender: "bot",
       text: `Hi 👋 I’m ${dataContext.name}, ask me anything about ${dataContext.name}!`,
+      loading: false,
     },
-    // {
-    //   sender: "bot",
-    //   text: "By the way, did you know you can have your own custom GPT connected to your messenger?",
-    // },
     {
       sender: "bot",
       text: "By the way, did you know you can connect your FB messenger with custom GPT?",
+      loading: false
     },
   ]);
 
@@ -71,11 +71,20 @@ const ChatSectionDashboard = ({ heightVal }) => {
     }
   };
 
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    if (listRef.current) {
+      const listElem = listRef.current;
+      listElem.scrollTop = listElem.scrollHeight;
+    }
+  }, [messages]);
+
   // useEffect(scrollToBottom, [messages, isSelected]);
 
-  const handleSubmit = async () => {
-    if (input.trim() !== "") {
-      setMessages([...messages, { sender: "user", text: input }]);
+  const handleSubmit = async (message='') => {
+    if (input.trim() !== "" || message !== '') {
+      setMessages([...messages, { sender: "user", text: message === '' ?  input : message, loading: false }, {sender: "bot", text:"", loading: true}]);
       //   const userinput = JSON.stringify(messages);
       console.log(messages.slice(-4));
       //   const submitData = {
@@ -107,35 +116,20 @@ const ChatSectionDashboard = ({ heightVal }) => {
       console.log(submitData);
 
       const reply = await getResponse(submitData, dataContext.authToken);
-      //   console.log(reply);
-      //   setMessages((prev) => [
-      //     ...prev,
-      //     { sender: "bot", text: reply.data.response },
-      //   ]);
-      // If messages count is more than 3, add the additional message
-      if (reply) {
-        // if (messages.length > 3) {
-        //   setMessages((prev) => [
-        //     ...prev,
-
-        //     { sender: "bot", text: reply.data.response },
-        //     {
-        //       sender: "bot",
-        //       text: "Sorry, due to free trial limitation, I wasn’t able to go over all your history to know the answer to your question. Could you please upgrade so I can learn everything?",
-        //     },
-        //   ]);
-        // } else {
-        setMessages((prev) => [
-          ...prev,
-          { sender: "bot", text: reply.data.response },
-        ]);
-        // }
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          { sender: "bot", text: "Error! Unable to connect!" },
-        ]);
-      }
+      setMessages(prev => {
+        console.log(prev, 'prev')
+        let updatedMessages = [...prev];
+        updatedMessages[updatedMessages.length - 1].loading = false;
+        console.log(updatedMessages[updatedMessages.length - 1], 'updatedMessages')
+        // Add the bot response
+        if (reply) {
+          // updatedMessages.push({ sender: "bot", text: reply.data.response });
+        updatedMessages[updatedMessages.length - 1].text = reply.data.response;
+        } else {
+        updatedMessages[updatedMessages.length - 1].text = "Error! Unable to connect!";
+        }
+        return updatedMessages;
+      });
       setInput("");
       dataContext.setMessagesLPFunction({ data: messages });
     }
@@ -181,24 +175,6 @@ const ChatSectionDashboard = ({ heightVal }) => {
                 }}
               >
                 <Grid item textAlign="center">
-                  {/* <Box style={{ my: 2 }}>
-                    <Typography
-                      style={{ fontSize: "52px", fontWeight: "bold" }}
-                    >
-                      Test it for Yourself!
-                    </Typography>
-                    <Typography
-                      style={{
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                        color: "grey",
-                      }}
-                    >
-                      MessengerGPT's messenger is trained on previous message +
-                      website's data.
-                    </Typography>
-                  </Box>
-                  <Box style={{ height: "50px" }}></Box> */}
                 </Grid>
                 <Grid item>
                   {/* <Box height={20}></Box> */}
@@ -216,7 +192,7 @@ const ChatSectionDashboard = ({ heightVal }) => {
                           edge="start"
                           color="inherit"
                           aria-label="menu"
-                          sx={{ mr: 2 }}
+                          sx={{ mr: 1 }}
                         >
                           {/* <MenuIcon /> */}
                           <Avatar
@@ -225,6 +201,7 @@ const ChatSectionDashboard = ({ heightVal }) => {
                                 ? dataContext.profileUrl
                                 : ""
                             }
+                            style={{width: '60px', height: '60px'}}
                           />
                         </IconButton>
                         <Typography
@@ -241,7 +218,7 @@ const ChatSectionDashboard = ({ heightVal }) => {
                           }}
                         >
                           {dataContext.name
-                            ? dataContext.name
+                            ? _.startCase(dataContext.name)
                             : "<Your Business Name>"}
                         </Typography>
                         {/* <Button color="inherit">Login</Button> */}
@@ -256,23 +233,15 @@ const ChatSectionDashboard = ({ heightVal }) => {
                   <Paper elevation={1}>
                     <div style={{ width: "100%", marginTop: "2px" }}>
                       <Box
-                        style={{
-                          // display: "flex",
-                          //   marginTop: "20px",
-                          //   marginBottom: "20px",
-                          //   height: "60vh",
-                          height: "450px",
-                          overflowY: "scroll",
-
-                          //   border: "1px solid lightgrey",
-                          //   borderRadius: "15px",
-                        }}
                       >
                         <List
+                          ref={listRef}
                           style={{
+                            height: "60vh",
                             overflowY: "auto",
                             scrollbarWidth: "none",
                             msOverflowStyle: "none",
+                            scrollBehavior: "smooth",
                           }}
                         >
                           {messages.map((message, index) => (
@@ -287,12 +256,13 @@ const ChatSectionDashboard = ({ heightVal }) => {
                               }}
                             >
                               {message.sender === "bot" && (
-                                <Avatar
-                                  src={
-                                    dataContext.profileUrl
-                                      ? dataContext.profileUrl
-                                      : ""
-                                  }
+                                <Avatar 
+                                src={
+                                  dataContext.profileUrl
+                                    ? dataContext.profileUrl
+                                    : ""
+                                }
+                                style={{marginRight: '12px', width: '40px'}}
                                 />
                               )}
                               <Box
@@ -303,7 +273,7 @@ const ChatSectionDashboard = ({ heightVal }) => {
                                   backgroundColor:
                                     message.sender === "bot"
                                       ? "#E4E6EB"
-                                      : "#4E5BF6",
+                                      : "#0084FF",
                                   color:
                                     message.sender === "bot"
                                       ? "black"
@@ -312,47 +282,26 @@ const ChatSectionDashboard = ({ heightVal }) => {
                                   overflowWrap: "break-word", // For long unbroken strings
                                 }}
                               >
-                                <ListItemText
+                              
+                                {message.sender === "bot" && message.loading ? (
+                                   <BeatLoader color="#9ca3af" size={10} />
+                                ) : (
+                                  <ListItemText
                                   primary={message.text}
                                   align={
-                                    message.sender === "bot" ? "left" : "right"
+                                    "left"
                                   }
                                   style={{
-                                    fontSize: "16px",
                                     fontFamily: "Inter, sans-serif !important",
                                   }}
                                 />
+                                )}
                               </Box>
                             </ListItem>
                           ))}
                           <div ref={messagesEndRef} />
                         </List>
                       </Box>
-                      {/* <Box
-                        width="100%"
-                        sx={{ background: "grey", display: "flex" }}
-                      >
-                        {dataContext.commonQuestions.map((message, index) => (
-                          <Box
-                            key={index}
-                            sx={{
-                              // maxWidth: 400,
-                              // border: "1px solid",
-                              borderRadius: "15px",
-                              backgroundColor: "#E4E6EB",
-                              // color: message.sender === "bot" ? "black" : "white",
-                              padding: "10px",
-                              // overflowWrap: "break-word", // For long unbroken strings
-                            }}
-                          >
-                            <Typography
-                              sx={{ fontSize: "12px", color: "grey" }}
-                            >
-                              {message}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </Box> */}
                       <Box
                         // width="400px"
                         sx={{
@@ -371,20 +320,21 @@ const ChatSectionDashboard = ({ heightVal }) => {
                             <Button
                               key={index}
                               onClick={() => {
-                                console.log(message);
-                                setInput(message);
+                               
+                                handleSubmit(message)
                               }}
                               sx={{
                                 textTransform: "none",
                                 borderRadius: "15px",
                                 backgroundColor: "#E4E6EB",
                                 padding: "10px",
+                                marginLeft: '10px',
                                 marginRight: "10px", // Add some spacing between boxes
                                 display: "inline-block", // This will prevent the Box from taking full width and thus allowing them to line up horizontally
                               }}
                             >
                               <Typography
-                                sx={{ fontSize: "12px", color: "grey" }}
+                                sx={{ fontSize: "15px", color: "grey" }}
                               >
                                 {message}
                               </Typography>

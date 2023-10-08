@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Visual Imports
@@ -26,6 +26,18 @@ import ListItem from "@mui/material/ListItem";
 // }));
 
 const SectionFooter = () => {
+  const [number, setNumber] = useState(4238486121);
+
+  const updateNumber = () => {
+    setNumber(number + 2);
+  };
+
+  useEffect(() => {
+    const interval  = setInterval(updateNumber, 1500);
+    return () => {
+      clearInterval(interval)
+    }
+  },[number])
   const theme = useTheme();
   const navigate = useNavigate();
   const onClickStart = () => {
@@ -62,7 +74,7 @@ const SectionFooter = () => {
             }}
           >
             <Typography style={{ fontSize: "38px", fontWeight: "700" }}>
-              4,238,486,121
+            {number}
             </Typography>
             <Typography style={{ fontSize: "18px", fontWeight: "700" }}>
               conversations automated

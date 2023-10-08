@@ -1570,3 +1570,60 @@ html {
   font-weight: bold;
   font-size: 14px;
 }
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #FFF2;
+  box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
+  position: relative;
+  animation: flash 0.5s ease-out infinite alternate;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #FFF2;
+    box-shadow: 32px 0 #FFF2, -32px 0 #FFF;
+  }
+  50% {
+    background-color: #FFF;
+    box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
+  }
+  100% {
+    background-color: #FFF2;
+    box-shadow: 32px 0 #FFF, -32px 0 #FFF2;
+  }
+}
+      
+/* This styles the overall scrollbar track */
+.boxClass::-webkit-scrollbar {
+  width: 4px; /* Adjust the width as needed */
+  background-color: #f5f5f5; /* Background of the scrollbar track */
+}
+
+/* This styles the handle or thumb */
+.boxClass::-webkit-scrollbar-thumb {
+  background-color: #cecece; /* Color of the scrolling thumb */
+  border-radius: 5px; /* Rounded corners on the thumb */
+}
+
+/* This styles the buttons on the scrollbar (if present) */
+.boxClass::-webkit-scrollbar-button {
+  display: none; /* This will hide the buttons, but you can style as desired */
+}
+
+/* This styles the hover effect on the thumb */
+.boxClass::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darken the thumb on hover */
+}
+
+.css-5xe99f-MuiLinearProgress-bar1 {
+  background: linear-gradient(225deg, #693283 0%, #323283 100%) !important;
+  
+}
+
+.css-5n52b1-MuiLinearProgress-root {
+  background-color: #69328336 !important;
+}
+

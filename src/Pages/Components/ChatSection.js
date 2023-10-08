@@ -22,7 +22,7 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-
+import { BeatLoader } from 'react-spinners';
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -32,6 +32,7 @@ import { useContext } from "react";
 import DataContext from "../../ContextAPI/DataState";
 // ContextAPI End
 import jwt_decode from "jwt-decode";
+import Loading from "./Loading";
 
 const ChatSection = () => {
   // Base Url
@@ -41,15 +42,17 @@ const ChatSection = () => {
   const navigate = useNavigate();
   const dataContext = useContext(DataContext);
   const [docData, setDocData] = useState({});
-
+  const [loading, setLoading] = useState(false)
   const [messages, setMessages] = useState([
     {
       sender: "bot",
       text: "Hi 👋 I’m MessengerGPT, ask me anything about MessengerGPT!",
+      loading: false,
     },
     {
       sender: "bot",
       text: "By the way, did you know you can have your own custom GPT connected to your messenger?",
+      loading: false
     },
   ]);
   const [input, setInput] = useState("");
@@ -62,6 +65,14 @@ const ChatSection = () => {
     "Can it connect to my whatsapp & instagram?",
   ]);
   const [isSelected, setIsSelected] = useState(false);
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    if (listRef.current) {
+      const listElem = listRef.current;
+      listElem.scrollTop = listElem.scrollHeight;
+    }
+  }, [messages]);
 
   const scrollToBottom = () => {
     if (isSelected) {
@@ -69,20 +80,14 @@ const ChatSection = () => {
     }
   };
 
-  // useEffect(scrollToBottom, [messages, isSelected]);
-
   const handleSubmit = async () => {
     if (input.trim() !== "") {
-      setMessages([...messages, { sender: "user", text: input }]);
-      //   const userinput = JSON.stringify(messages);
+      setLoading(true)
+      setMessages([...messages, { sender: "user", text: input, loading: false }, {sender: "bot", text:"", loading: true}]);
       console.log(messages.slice(-4));
-      //   const submitData = {
-      //     userQuestion: userinput,
-      //   };
-      // Extract the last four messages
       const lastFourMessages = messages.slice(-4).map((msg) => msg.text);
-
       // Determine the properties based on the length of lastFourMessages
+      console.log(lastFourMessages, 'lastFourMessage')
       const secondLastMsg =
         lastFourMessages.length >= 2
           ? lastFourMessages[lastFourMessages.length - 2]
@@ -93,7 +98,6 @@ const ChatSection = () => {
           : "";
       const fourthLastMsg =
         lastFourMessages.length >= 4 ? lastFourMessages[0] : "";
-
       // Prepare the submit data
       const submitData = {
         userQuestion: input,
@@ -101,45 +105,31 @@ const ChatSection = () => {
         thirdLastMsg,
         fourthLastMsg,
       };
-
       console.log(submitData);
       const token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI4NDQ2MzY3NTlkZmUyYmM5OGU5NDAyMTAzMmI4YmFiZSIsImlhdCI6MTY5NTMyMzgzOCwiZXhwIjoxNzAwNTA3ODM4fQ.Y-4S9W3VIyq6t3u6Cfv4-dB7wNq4muFJkaVODma8CC8";
-
       const reply = await getResponseSelf(submitData, token);
-      //   console.log(reply);
-      //   setMessages((prev) => [
-      //     ...prev,
-      //     { sender: "bot", text: reply.data.response },
-      //   ]);
-      // If messages count is more than 3, add the additional message
-      if (reply) {
-        // if (messages.length > 3) {
-        //   setMessages((prev) => [
-        //     ...prev,
-
-        //     { sender: "bot", text: reply.data.response },
-        //     {
-        //       sender: "bot",
-        //       text: "Sorry, due to free trial limitation, I wasn’t able to go over all your history to know the answer to your question. Could you please upgrade so I can learn everything?",
-        //     },
-        //   ]);
-        // } else {
-        setMessages((prev) => [
-          ...prev,
-          { sender: "bot", text: reply.data.response },
-        ]);
-        // }
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          { sender: "bot", text: "Error! Unable to connect!" },
-        ]);
-      }
+      setMessages(prev => {
+        console.log(prev, 'prev')
+        let updatedMessages = [...prev];
+        updatedMessages[updatedMessages.length - 1].loading = false;
+        console.log(updatedMessages[updatedMessages.length - 1], 'updatedMessages')
+        // Add the bot response
+        if (reply) {
+          // updatedMessages.push({ sender: "bot", text: reply.data.response });
+        updatedMessages[updatedMessages.length - 1].text = reply.data.response;
+        } else {
+        updatedMessages[updatedMessages.length - 1].text = "Error! Unable to connect!";
+        }
+        return updatedMessages;
+      });
       setInput("");
+      setLoading(false)
       dataContext.setMessagesLPFunction({ data: messages });
+   
     }
   };
+  console.log(messages, 'messages')
   const getResponseSelf = async (submitData, bearerToken) => {
     try {
       const response = await axios.post(
@@ -243,22 +233,15 @@ const ChatSection = () => {
                   <Paper elevation={1}>
                     <div style={{ width: "100%", marginTop: "2px" }}>
                       <Box
-                        style={{
-                          // display: "flex",
-                          //   marginTop: "20px",
-                          //   marginBottom: "20px",
-                          height: "60vh",
-                          overflowY: "scroll",
-
-                          //   border: "1px solid lightgrey",
-                          //   borderRadius: "15px",
-                        }}
                       >
                         <List
-                          style={{
+                          ref={listRef}
+                           style={{
+                            height: "60vh",
                             overflowY: "auto",
                             scrollbarWidth: "none",
                             msOverflowStyle: "none",
+                            scrollBehavior: "smooth",
                           }}
                         >
                           {messages.map((message, index) => (
@@ -292,15 +275,30 @@ const ChatSection = () => {
                                   overflowWrap: "break-word", // For long unbroken strings
                                 }}
                               >
-                                <ListItemText
+                                {/* {message.sender === "user" && (
+                                   <ListItemText
+                                   primary={message.text}
+                                   align={
+                                    "right"
+                                   }
+                                   style={{
+                                     fontFamily: "Inter, sans-serif !important",
+                                   }}
+                                 />
+                                )} */}
+                                {message.sender === "bot" && message.loading ? (
+                                   <BeatLoader color="#9ca3af" size={10} />
+                                ) : (
+                                  <ListItemText
                                   primary={message.text}
                                   align={
-                                    message.sender === "bot" ? "left" : "right"
+                                    "left"
                                   }
                                   style={{
                                     fontFamily: "Inter, sans-serif !important",
                                   }}
                                 />
+                                )}
                               </Box>
                             </ListItem>
                           ))}
@@ -314,7 +312,7 @@ const ChatSection = () => {
                           display: "flex",
                           // overflowX: "auto", // Allow horizontal scrolling
                           whiteSpace: "nowrap", // Prevent wrapping to the next line
-                          p: 1,
+                          padding: '1rem 2rem',
                         }}
                       >
                         {commonMessagesUser.slice(0, 3).map(
@@ -331,14 +329,15 @@ const ChatSection = () => {
                               sx={{
                                 textTransform: "none",
                                 borderRadius: "15px",
-                                backgroundColor: "#E4E6EB",
+                                backgroundColor: '#EEE',
+                                color: '#585858',
                                 padding: "10px",
                                 marginRight: "10px", // Add some spacing between boxes
                                 display: "inline-block", // This will prevent the Box from taking full width and thus allowing them to line up horizontally
                               }}
                             >
                               <Typography
-                                sx={{ fontSize: "12px", color: "grey" }}
+                                sx={{ fontSize: "15px" }}
                               >
                                 {message}
                               </Typography>
@@ -412,6 +411,7 @@ const ChatSection = () => {
                           style={{
                             display: "",
                             justifyContent: "cemter",
+                            position: "relative"
                           }}
                         >
                           <Box height="5px" backgroundColor=""></Box>
@@ -433,6 +433,9 @@ const ChatSection = () => {
                               fontSize: "12px",
                               fontWeight: "700",
                               textTransform: "none",
+                              position: "absolute",
+                              left: "-77px",
+                              top: "5px"
 
                               // p: 0,
                             }}
@@ -453,6 +456,7 @@ const ChatSection = () => {
                           justifyContent: "cemter",
                           alignItems: "center",
                           marginTop: "22px",
+                          
                         }}
                       >
                         <Button>

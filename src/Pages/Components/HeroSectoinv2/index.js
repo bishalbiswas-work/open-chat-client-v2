@@ -160,6 +160,7 @@ const HeroSectionv2 = () => {
                 variant="outlined"
                 type="text"
                 fullWidth
+                InputProps={{ style: { borderRadius: '15px' } }}
                 disabled={successUrl}
                 value={input}
                 onChange={handleChange}
@@ -192,7 +193,10 @@ const HeroSectionv2 = () => {
                 >
                   <Typography
                     fontSize="10px !important"
-                    style={{ fontFamily: "Inter, sans-serif " }}
+                    style={{ 
+                      fontFamily: "Inter, sans-serif ",
+                      fontWeight: "bold", 
+                    }}
                   >
                     Confirm
                   </Typography>

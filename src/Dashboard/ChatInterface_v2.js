@@ -19,6 +19,7 @@ import ChatSectionDashboard from "./Components/ChatSectionDashboard";
 import { useContext } from "react";
 // import DataContext from "../../ContextAPI/DataState";
 import DataContext from "../ContextAPI/DataState";
+import { startCase } from "lodash";
 // ContextAPI End
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -122,7 +123,7 @@ const ChatInterface_v2 = () => {
                     color: "#170F49",
                   }}
                 >
-                  {`About ${dataContext.name}`}
+                  {`About ${startCase(dataContext.name)}`}
                 </Typography>
               </Box>
               <Grid
