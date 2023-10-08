@@ -26,6 +26,7 @@ import DataContext from "../../ContextAPI/DataState";
 // ContextAPI End
 // Icons
 import CircularProgress from "@mui/material/CircularProgress";
+import { startCase } from "lodash";
 // End Icons
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -153,10 +154,10 @@ const ContextFeed = () => {
                   mx: 2,
                   fontSize: "20px",
                   fontWeight: 500,
-                  color: !selectedInput2004 ? "#000" : "#717171",
+                  color: selectedInput2004 ? "#000" : "#717171",
                 }}
                 onClick={() => {
-                  setSelectedInput2004(false);
+                  setSelectedInput2004(true);
                 }}
               >
                 {" "}
@@ -168,11 +169,11 @@ const ContextFeed = () => {
                   mx: 2,
                   fontSize: "20px",
                   fontWeight: 500,
-                  color: selectedInput2004 ? "#000" : "#717171",
+                  color: !selectedInput2004 ? "#000" : "#717171",
                   textTransform: "none",
                 }}
                 onClick={() => {
-                  setSelectedInput2004(true);
+                  setSelectedInput2004(false);
                 }}
               >
                 Text
@@ -194,7 +195,7 @@ const ContextFeed = () => {
                       marginLeft: "1rem",
                     }}
                   >
-                    {`Add Data About <BeTimeful>`}
+                    {`Add Data ${startCase(dataContext.name)}`}
                   </Typography>
                 </Box>
                 <Box
@@ -205,39 +206,6 @@ const ContextFeed = () => {
                     padding: "10px",
                   }}
                 >
-                  {/* <TextField
-                    placeholder="Paste your company information"
-                    variant="outlined"
-                    type="text"
-                    fullWidth
-                    multiline
-                    value={aboutBusiness}
-                    rows={6}
-                    // value={item.ans}
-                    style={{
-                      fontFamily: "Inter, sans-serif !important",
-                    }}
-                    sx={{
-                      fontSize: "12px", // reduced font size
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "transparent", // make the border transparent
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "transparent", // make the hover border transparent
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "transparent", // make the focus border transparent
-                        },
-                      },
-                      "& .MuiInputBase-root": {
-                        // height: "40px", // reduce the height, but ensure it's enough for the text and padding
-                      },
-                    }}
-                    onChange={(e) =>
-                      handleAboutBusinessChange(index, e.target.value)
-                    }
-                  /> */}
                   <TextField
                     placeholder="Paste your company information"
                     type="text"
@@ -258,52 +226,6 @@ const ContextFeed = () => {
                     }}
                     onChange={(e) => handleAboutBusinessChange(e.target.value)}
                   />
-                  {/* <textarea
-                    placeholder="Paste your company information"
-                    value={aboutBusiness}
-                    rows="6"
-                    style={{
-                      width: "100%", // For full width
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      border: "none", // Removes default border
-                      outline: "none", // Removes focus border
-                      resize: "none", // Prevents user resizing
-                      // Add other desired styles
-                    }}
-                    onChange={(e) => handleAboutBusinessChange(e.target.value)}
-                  /> */}
-                  {/* <Box
-                    height="100%"
-                    style={{
-                      display: "",
-                      justifyContent: "cemter",
-                    }}
-                  >
-                    <Box height="180px" backgroundColor=""></Box>
-                    <Button
-                      // variant="outlined"
-                      size="small"
-                      // onClick={handleSubmit}
-                      sx={{
-                        fontFamily: "Inter, sans-serif !important",
-                      }}
-                      style={{
-                        display: "flex", // Added to help with alignment
-                        alignItems: "center", // Center items vertically
-                        justifyContent: "center", // Center items horizontally
-                        color: "blue",
-                        //   color: "white",
-                        //   borderRadius: "10px",
-                        //   background: "#0084FF",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        textTransform: "none",
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  </Box> */}
                 </Box>
               </Box>
             )}
@@ -351,22 +273,6 @@ const ContextFeed = () => {
                     }}
                     onChange={(e) => handleQuestionChange(e.target.value)}
                   />
-                  {/* <textarea
-                    placeholder="Aa"
-                    value={question}
-                    // rows="4"
-                    style={{
-                      padding: "5px 10px",
-                      width: "100%", // For full width
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      border: "none", // Removes default border
-                      outline: "none", // Removes focus border
-                      resize: "none", // Prevents user resizing
-                      // Add other desired styles
-                    }}
-                    onChange={(e) => handleQuestionChange(e.target.value)}
-                  /> */}
                 </Box>
                 <Box
                   style={{
@@ -377,36 +283,6 @@ const ContextFeed = () => {
                     position: "relative",
                   }}
                 >
-                  {/* <TextField
-                    placeholder="Paste your company information"
-                    variant="outlined"
-                    type="text"
-                    fullWidth
-                    multiline
-                    rows={4}
-                    // value={item.ans}
-                    style={{
-                      fontFamily: "Inter, sans-serif !important",
-                    }}
-                    sx={{
-                      fontSize: "12px", // reduced font size
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "transparent", // make the border transparent
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "transparent", // make the hover border transparent
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "transparent", // make the focus border transparent
-                        },
-                      },
-                      "& .MuiInputBase-root": {
-                        //   height: "40px", // reduce the height, but ensure it's enough for the text and padding
-                      },
-                    }}
-                    // onChange={(e) => handleAnswerChange(index, e.target.value)}
-                  /> */}
                   <TextField
                     placeholder="Answer"
                     type="text"
@@ -427,21 +303,6 @@ const ContextFeed = () => {
                     }}
                     onChange={(e) => handleAnswerChange(e.target.value)}
                   />
-                  {/* <textarea
-                    placeholder="Paste your company information"
-                    value={answer}
-                    rows="4"
-                    style={{
-                      width: "100%", // For full width
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      border: "none", // Removes default border
-                      outline: "none", // Removes focus border
-                      resize: "none", // Prevents user resizing
-                      // Add other desired styles
-                    }}
-                    onChange={(e) => handleAnswerChange(e.target.value)}
-                  /> */}
                   <Button
                     // variant="outlined"
                     size="small"

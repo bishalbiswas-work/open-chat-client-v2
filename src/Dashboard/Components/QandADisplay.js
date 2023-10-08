@@ -57,6 +57,7 @@ const QandADisplay = ({ content: initialContent }) => {
   return (
     <>
       <Box
+      className="boxClass"
         style={{
           maxHeight: "400px",
           overflowY: "auto",
@@ -77,43 +78,10 @@ const QandADisplay = ({ content: initialContent }) => {
                       padding: "10px",
                       paddingTop: "20px",
                       //   backgroundColor: "#F0F2F5",
-                      border: "1px solid lightgrey",
+                      border: "2px solid #7B68EE",
                       borderRadius: "15px",
                     }}
                   >
-                    {/* <TextField
-                      placeholder="Aa"
-                      variant="outlined"
-                      type="text"
-                      fullWidth
-                      value={questions[index]}
-                      style={{
-                        fontFamily: "Inter, sans-serif !important",
-                      }}
-                      sx={{
-                        fontSize: "10px", // reduced font size
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            // borderColor: "transparent", // make the border transparent
-                            borderWidth: 0,
-                          },
-                          "&:hover fieldset": {
-                            // borderColor: "transparent", // make the hover border transparent
-                            borderWidth: 0,
-                          },
-                          "&.Mui-focused fieldset": {
-                            // borderColor: "transparent", // make the focus border transparent
-                            borderWidth: 0,
-                          },
-                        },
-                        "& .MuiInputBase-root": {
-                          height: "40px", // reduce the height, but ensure it's enough for the text and padding
-                        },
-                      }}
-                      onChange={(e) =>
-                        handleQuestionChange(index, e.target.value)
-                      }
-                    /> */}
                     <textarea
                       placeholder="Aa"
                       value={questions[index]}
@@ -121,7 +89,7 @@ const QandADisplay = ({ content: initialContent }) => {
                       style={{
                         width: "100%", // For full width
                         fontFamily: "Inter, sans-serif",
-                        fontSize: "12px",
+                        fontSize: "15px",
                         border: "none", // Removes default border
                         outline: "none", // Removes focus border
                         resize: "none", // Prevents user resizing
@@ -176,49 +144,10 @@ const QandADisplay = ({ content: initialContent }) => {
                       marginLeft: "15px",
                       padding: "10px",
                       //   backgroundColor: "#F0F2F5",
-                      border: "1px solid lightgrey",
+                      border: "2px solid lightgrey",
                       borderRadius: "15px",
                     }}
                   >
-                    {/* <TextField
-                  placeholder="Aa"
-                  // variant="outlined"
-                  // type="text"
-                  fullWidth
-                  // id="filled-multiline-flexible"
-                  // label="Multiline"
-                  multiline
-                  // maxRows={4}
-                  rows={4}
-                  // variant="filled"
-                  value={answers[index]}
-                  style={{
-                    // eight: "100px", // Or any reasonable max-height you need
-                    // overflowY: "auto",
-                    fontFamily: "Inter, sans-serif !important",
-                  }}
-                  sx={{
-                    fontSize: "12px", // reduced font size
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        // borderColor: "transparent", // make the border transparent
-                        borderWidth: 0,
-                      },
-                      "&:hover fieldset": {
-                        // borderColor: "transparent", // make the hover border transparent
-                        borderWidth: 0,
-                      },
-                      "&.Mui-focused fieldset": {
-                        // borderColor: "transparent", // make the focus border transparent
-                        borderWidth: 0,
-                      },
-                    },
-                    "& .MuiInputBase-root": {
-                      //   height: "40px", // reduce the height, but ensure it's enough for the text and padding
-                    },
-                  }}
-                  onChange={(e) => handleAnswerChange(index, e.target.value)}
-                /> */}
                     <textarea
                       placeholder="Aa"
                       value={answers[index]}
@@ -226,7 +155,7 @@ const QandADisplay = ({ content: initialContent }) => {
                       style={{
                         width: "100%", // For full width
                         fontFamily: "Inter, sans-serif",
-                        fontSize: "12px",
+                        fontSize: "15px",
                         border: "none", // Removes default border
                         outline: "none", // Removes focus border
                         resize: "none", // Prevents user resizing
@@ -236,49 +165,12 @@ const QandADisplay = ({ content: initialContent }) => {
                         handleAnswerChange(index, e.target.value)
                       }
                     />
-
-                    {/* <Box
-                  height="100%"
-                  style={{
-                    display: "",
-                    justifyContent: "cemter",
-                  }}
-                >
-                  <Box height="80px" backgroundColor=""></Box>
-                  <Button
-                    // variant="outlined"
-                    size="small"
-                    // onClick={handleSubmit}
-                    sx={{
-                      fontFamily: "Inter, sans-serif !important",
-                    }}
-                    style={{
-                      display: "flex", // Added to help with alignment
-                      alignItems: "center", // Center items vertically
-                      justifyContent: "center", // Center items horizontally
-                      color: "blue",
-                      //   color: "white",
-                      //   borderRadius: "10px",
-                      //   background: "#0084FF",
-                      fontSize: "12px",
-                      fontWeight: "700",
-                      textTransform: "none",
-
-                      // p: 0,
-                    }}
-                  >
-                    Update
-                  </Button>
-                </Box> */}
                   </Box>
                 </Box>
               </Box>
             </Grid>
             <Grid item xs={1}>
-              {/* <IconButton>
-                <DeleteIcon />
-              </IconButton> */}
-              <IconButton style={{ marginTop: "9px", marginLeft: "-25px" }}>
+              <IconButton style={{ marginTop: "20px", marginLeft: "-25px" }}>
                 <img src="/assets/delete.svg" alt="delete" />
               </IconButton>
             </Grid>

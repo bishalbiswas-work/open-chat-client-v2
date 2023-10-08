@@ -51,7 +51,7 @@ const SectionA1 = () => {
           sx={{
             width: "100%",
 
-            backgroundColor: "#e5f3ff",
+            backgroundColor: "#F5F5F7",
             borderRadius: "25px",
             height: "740px",
             [theme.breakpoints.down("md")]: {
@@ -85,7 +85,7 @@ const SectionA1 = () => {
           </Box> */}
           <Grid
             container
-            spacing={2}
+            spacing={1}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -132,7 +132,7 @@ const SectionA1 = () => {
                     <Typography variant="h4">Again.</Typography>
                   </Typography> */}
                   <Typography
-                    variant="h3"
+                    variant="h1"
                     gutterBottom
                     sx={{
                       my: 2,
@@ -147,7 +147,7 @@ const SectionA1 = () => {
                       gutterBottom
                       sx={{
                         my: 2,
-                        fontSize: "32px",
+                        fontSize: "45px",
                         fontWeight: "700",
                         mt: 6,
                         fontFamily: "Helvetica-Bold, sans-serif",
@@ -160,7 +160,7 @@ const SectionA1 = () => {
                       gutterBottom
                       sx={{
                         my: 1,
-                        fontSize: "32px",
+                        fontSize: "45px",
                         fontWeight: "700",
                         fontFamily: "Helvetica-Bold, sans-serif",
                         // mt: 6,
@@ -394,8 +394,8 @@ const SectionA1 = () => {
                 }}
               >
                 <img
-                  src="/assets/boy_sitting_with_messages.png"
-                  style={{ maxWidth: "100%", height: "550px" }}
+                  src="/a1.png"
+                  style={{marginLeft: '-120px', height: '400px'}}
                 />
               </Box>
             </Grid>

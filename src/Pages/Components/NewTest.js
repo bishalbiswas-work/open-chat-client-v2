@@ -2,7 +2,7 @@ import React from "react";
 
 const NewTest = () => {
   return (
-    <div style={{ padding: "2rem 4rem", marginLeft: "10px" }}>
+    <div style={{ padding: "2rem 6rem", marginLeft: "10px" }}>
       <div className="style-0">
         <div className="style-1">
           <div className="style-2">
